@@ -1,21 +1,13 @@
 package com.riwi.table_trick.api.controllers;
 
+import java.util.List;
 import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.riwi.table_trick.api.dto.request.ClienteRequest;
 import com.riwi.table_trick.api.dto.response.ClienteResponse;
@@ -26,6 +18,7 @@ import lombok.AllArgsConstructor;
 
 @RestController
 @RequestMapping(path = "/cliente")
+@CrossOrigin(origins = "http://127.0.0.1:5500")
 @AllArgsConstructor
 public class ClienteController {
 
@@ -38,8 +31,8 @@ public class ClienteController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<ClienteResponse>> getAll(@RequestParam(defaultValue = "1") int page, 
-            @RequestParam(defaultValue = "5") int size, @RequestHeader(required = false) SortType sortType){
+    public ResponseEntity<Page<ClienteResponse>> getAll(@RequestParam(defaultValue = "1") int page,
+            @RequestParam(defaultValue = "8") int size, @RequestHeader(required = false) SortType sortType){
 
                 if(Objects.isNull(sortType)) sortType = SortType.NONE;
 
@@ -47,18 +40,26 @@ public class ClienteController {
 
             }
 
+/*    @GetMapping(path = "/id/{id}")
+    public ResponseEntity getById(@PathVariable String id){
+        return ResponseEntity.ok(this.clienteService.getById(id));
+    }*/
+
+    @GetMapping(path = "/consulta")
+    public ResponseEntity<List<ClienteResponse>> getClientesPorConsulta(@RequestParam("nombre") String nombre) {
+        List<ClienteResponse> clientes = clienteService.getByName(nombre);
+        return ResponseEntity.ok(clientes);
+    }
+
+
+
     @PutMapping
     public ResponseEntity update(@RequestBody ClienteRequest request, @PathVariable String id){
         return ResponseEntity.ok(this.clienteService.update(request, id));
     }
-    
+
     @DeleteMapping
     public ResponseEntity delete(@PathVariable String id){
         return ResponseEntity.noContent().build();
-    }
-
-    @GetMapping(path = "/{id}")
-    public ResponseEntity getById(@PathVariable String id){
-        return ResponseEntity.ok(this.clienteService.getById(id));
     }
 }

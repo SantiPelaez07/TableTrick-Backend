@@ -15,6 +15,10 @@ import com.riwi.table_trick.util.enums.SortType;
 
 import lombok.AllArgsConstructor;
 
+import javax.swing.text.html.parser.Entity;
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @AllArgsConstructor
 public class ClienteService implements IClienteService {
@@ -28,7 +32,22 @@ public class ClienteService implements IClienteService {
     }
 
     @Override
-    public ClienteResponse create(ClienteRequest request) {
+    public List<ClienteResponse> getByName(String name) {
+        // Buscar por nombre en el repositorio y obtener una lista de ClienteResponse
+        List<Cliente> clientes = clienteRepository.findByNombre(name);
+
+
+        List<ClienteResponse> clienteResponse = clientes.stream()
+                .map(this::entityToResponse)
+                .collect(Collectors.toList());
+
+        return clienteResponse;
+
+    }
+
+
+    @Override
+    public   ClienteResponse create(ClienteRequest request) {
         Cliente cliente = this.requestToEntity(request);
         return entityToResponse(this.clienteRepository.save(cliente));
     }
