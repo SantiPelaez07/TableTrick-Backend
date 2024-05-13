@@ -40,26 +40,32 @@ public class ClienteController {
 
             }
 
-/*    @GetMapping(path = "/id/{id}")
+    @GetMapping(path = "/id/{id}")
     public ResponseEntity getById(@PathVariable String id){
         return ResponseEntity.ok(this.clienteService.getById(id));
-    }*/
+    }
 
     @GetMapping(path = "/consulta")
-    public ResponseEntity<List<ClienteResponse>> getClientesPorConsulta(@RequestParam("nombre") String nombre) {
-        List<ClienteResponse> clientes = clienteService.getByName(nombre);
-        return ResponseEntity.ok(clientes);
+    public ResponseEntity<Page<ClienteResponse>> getClientesPorConsulta(
+            @RequestParam("nombre") String nombre,
+            @RequestParam(value = "page", defaultValue = "1") int page,
+            @RequestParam(value = "size", defaultValue = "8") int size) {
+
+        // Obtener la página de clientes por nombre
+        Page<ClienteResponse> clientePage = clienteService.getByName(nombre, page - 1, size);
+
+        return ResponseEntity.ok(clientePage);
     }
 
 
-
-    @PutMapping
+    @PutMapping(path = "/id/{id}")
     public ResponseEntity update(@RequestBody ClienteRequest request, @PathVariable String id){
         return ResponseEntity.ok(this.clienteService.update(request, id));
     }
 
-    @DeleteMapping
-    public ResponseEntity delete(@PathVariable String id){
+    @DeleteMapping(path = "/id/{id}")
+    public ResponseEntity<Void> delete(@PathVariable String id){
+        clienteService.delete(id);
         return ResponseEntity.noContent().build();
     }
 }

@@ -3,6 +3,7 @@ package com.riwi.table_trick.infrastructure.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -32,17 +33,14 @@ public class ClienteService implements IClienteService {
     }
 
     @Override
-    public List<ClienteResponse> getByName(String name) {
-        // Buscar por nombre en el repositorio y obtener una lista de ClienteResponse
-        List<Cliente> clientes = clienteRepository.findByNombre(name);
-
-
-        List<ClienteResponse> clienteResponse = clientes.stream()
-                .map(this::entityToResponse)
-                .collect(Collectors.toList());
-
-        return clienteResponse;
-
+    public Page<ClienteResponse> getByName(String name, int page, int size) {
+        // Crear objeto Pageable para la paginación
+        Pageable pageable = PageRequest.of(page, size);
+        // Buscar por nombre en el repositorio y obtener una página de resultados
+        Page<Cliente> clientePage = clienteRepository.findByNombreStartingWithIgnoreCase(name, pageable);
+        // Mapear la página de entidades a una página de respuestas
+        Page<ClienteResponse> clienteResponsePage = clientePage.map(this::entityToResponse);
+        return clienteResponsePage;
     }
 
 
@@ -54,7 +52,7 @@ public class ClienteService implements IClienteService {
 
     @Override
     public void delete(String id) {
-        this.clienteRepository.delete(this.find(id));
+        this.clienteRepository.deleteById(id);
     }
 
     @Override
@@ -89,6 +87,7 @@ public class ClienteService implements IClienteService {
 
     private ClienteResponse entityToResponse(Cliente entity){
         return ClienteResponse.builder()
+                .id(entity.getId())
         .nombre(entity.getNombre())
         .apellido(entity.getApellido())
         .email(entity.getEmail())
