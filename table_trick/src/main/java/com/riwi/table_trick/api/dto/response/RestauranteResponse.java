@@ -23,7 +23,7 @@ public class RestauranteResponse {
     private String email;
     private String contraseña;
     private LocalDate fecha_registro;
-    private String Ubicacion;
+    private String ubicacion;
     private int capacidad_maxima;
     private String especialidad;
     private TipoCuenta tipoCuenta;

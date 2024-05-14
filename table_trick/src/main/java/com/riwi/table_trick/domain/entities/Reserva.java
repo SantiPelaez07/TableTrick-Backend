@@ -25,8 +25,8 @@ import lombok.NoArgsConstructor;
 public class Reserva {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private String id;
     @Column(nullable = false)
     private LocalTime hora;
     @Column(nullable = false)

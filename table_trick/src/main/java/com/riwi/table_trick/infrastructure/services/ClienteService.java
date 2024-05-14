@@ -3,6 +3,7 @@ package com.riwi.table_trick.infrastructure.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +15,10 @@ import com.riwi.table_trick.infrastructure.abstract_services.IClienteService;
 import com.riwi.table_trick.util.enums.SortType;
 
 import lombok.AllArgsConstructor;
+
+import javax.swing.text.html.parser.Entity;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -28,14 +33,26 @@ public class ClienteService implements IClienteService {
     }
 
     @Override
-    public ClienteResponse create(ClienteRequest request) {
+    public Page<ClienteResponse> getByName(String name, int page, int size) {
+        // Crear objeto Pageable para la paginación
+        Pageable pageable = PageRequest.of(page, size);
+        // Buscar por nombre en el repositorio y obtener una página de resultados
+        Page<Cliente> clientePage = clienteRepository.findByNombreStartingWithIgnoreCase(name, pageable);
+        // Mapear la página de entidades a una página de respuestas
+        Page<ClienteResponse> clienteResponsePage = clientePage.map(this::entityToResponse);
+        return clienteResponsePage;
+    }
+
+
+    @Override
+    public   ClienteResponse create(ClienteRequest request) {
         Cliente cliente = this.requestToEntity(request);
         return entityToResponse(this.clienteRepository.save(cliente));
     }
 
     @Override
     public void delete(String id) {
-        this.clienteRepository.delete(this.find(id));
+        this.clienteRepository.deleteById(id);
     }
 
     @Override
@@ -70,10 +87,10 @@ public class ClienteService implements IClienteService {
 
     private ClienteResponse entityToResponse(Cliente entity){
         return ClienteResponse.builder()
+                .id(entity.getId())
         .nombre(entity.getNombre())
         .apellido(entity.getApellido())
         .email(entity.getEmail())
-        .contraseña(entity.getContraseña())
         .telefono(entity.getTelefono()).build();
     }
 

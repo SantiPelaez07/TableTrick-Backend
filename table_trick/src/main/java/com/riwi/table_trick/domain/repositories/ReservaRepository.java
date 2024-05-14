@@ -6,6 +6,6 @@ import com.riwi.table_trick.domain.entities.Reserva;
 import java.time.LocalDate;
 
 
-public interface ReservaRepository extends JpaRepository <Reserva, Long>{
+public interface ReservaRepository extends JpaRepository <Reserva, String>{
     public Reserva findByFecha(LocalDate fecha);
 }

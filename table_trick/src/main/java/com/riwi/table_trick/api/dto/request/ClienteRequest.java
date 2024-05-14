@@ -1,7 +1,6 @@
 package com.riwi.table_trick.api.dto.request;
 
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -22,5 +21,10 @@ public class ClienteRequest {
     @NotBlank(message = "La contraseña del cliente es requerido")
     private String contraseña;
     @NotBlank(message = "El teléfono del cliente es requerido")
+    @Size(
+            min = 10,
+            max = 20,
+            message = "El número de teléfono debe tener entre 10 y 20 caracteres"
+    )
     private String telefono;
 }
