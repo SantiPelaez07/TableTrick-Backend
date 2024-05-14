@@ -91,7 +91,6 @@ public class ClienteService implements IClienteService {
         .nombre(entity.getNombre())
         .apellido(entity.getApellido())
         .email(entity.getEmail())
-        .contraseña(entity.getContraseña())
         .telefono(entity.getTelefono()).build();
     }
 

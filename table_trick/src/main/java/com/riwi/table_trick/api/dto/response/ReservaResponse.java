@@ -19,6 +19,6 @@ public class ReservaResponse {
     private String tipo;
     private int cantidadPersonas;
     private String descripcion;
-    private ClienteResponse cliente;
-    private RestauranteResponse restaurante;
+    private ClienteResponseToReserva cliente;
+    private RestauranteToReservaConverter restaurante;
 }

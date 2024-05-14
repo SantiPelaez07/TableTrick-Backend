@@ -30,9 +30,9 @@ public class Restaurante {
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
     @Column(length = 40, nullable = false)
-    private String nombreAutor;
+    private String nombrePropietario;
     @Column(length = 50, nullable = false)
-    private String apellidoAutor;
+    private String apellidoPropietario;
     @Column(length = 50, nullable = false)
     private String nombreComercial;
     @Column(length = 10, nullable = false)
@@ -44,7 +44,7 @@ public class Restaurante {
     @Column(nullable = false)
     private LocalDate fecha_registro;
     @Column(length = 180, nullable = false)
-    private String Ubicacion;
+    private String ubicacion;
     @Column(nullable = false)
     private int capacidad_maxima;
     @Column(nullable = false)
