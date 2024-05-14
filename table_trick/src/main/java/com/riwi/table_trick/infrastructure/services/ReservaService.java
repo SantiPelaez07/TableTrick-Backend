@@ -16,6 +16,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -29,8 +31,8 @@ public class ReservaService implements IReservaService {
     private final RestauranteRepository restauranteRepository;
 
     @Override
-    public void delete(Long id) {
-
+    public void delete(String id) {
+        this.entityToResponse(this.reservaRepository.deleteById(id));
     }
 
     @Override
@@ -50,8 +52,6 @@ public class ReservaService implements IReservaService {
         return this.entityToResponse(this.reservaRepository.save(reserva));
     }
 
-
-
     @Override
     public ReservaResponse create(ReservaRequest reservaRequest) {
         Cliente cliente = this.clienteRepository.findById(reservaRequest.getCliente_id()).orElseThrow(null);
@@ -68,16 +68,24 @@ public class ReservaService implements IReservaService {
 
     @Override
     public Page<ReservaResponse> getAll(int page, int size, SortType sort) {
-        return null;
+
+        PageRequest pagination = null;
+
+        switch (sort){
+            case NONE ->  pagination = PageRequest.of(page, size);
+            //Modificar por la dirección que deseamos
+            case ASC -> pagination = PageRequest.of(page, size, Sort.by(Sort.Direction.ASC));
+            case DESC -> pagination = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC));
+        }
+
+
+        return this.reservaRepository.findAll(pagination).map(reserva -> this.entityToResponse(reserva));
     }
 
     @Override
     public ReservaResponse getById(String id) {
         return null;
     }
-
-
-
 
 
 
