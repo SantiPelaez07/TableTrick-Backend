@@ -32,7 +32,6 @@ public class ReservaService implements IReservaService {
 
     @Override
     public void delete(String id) {
-        this.entityToResponse(this.reservaRepository.deleteById(id));
     }
 
     @Override
