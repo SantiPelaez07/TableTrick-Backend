@@ -13,12 +13,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ReservaResponse {
-    private Long id;
+    private String id;
     private LocalTime hora;
     private LocalDate fecha;
     private String tipo;
     private int cantidadPersonas;
     private String descripcion;
     private ClienteResponseToReserva cliente;
-    private RestauranteToReservaConverter restaurante;
+    private RestauranteResponseToReserva restaurante;
 }

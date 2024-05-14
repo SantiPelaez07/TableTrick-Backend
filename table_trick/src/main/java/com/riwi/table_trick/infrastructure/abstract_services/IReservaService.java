@@ -5,6 +5,6 @@ import com.riwi.table_trick.api.dto.response.ClienteResponse;
 import com.riwi.table_trick.api.dto.response.ReservaResponse;
 
 public interface IReservaService extends CrudService <ReservaRequest, ReservaResponse, Long>{
-    public ReservaResponse getById(Long id);
+    public ReservaResponse getById(String id);
 
 }

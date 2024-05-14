@@ -13,7 +13,7 @@ import java.time.LocalDate;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class RestauranteToReservaConverter {
+public class RestauranteResponseToReserva {
     private String id;
     private String nombreComercial;
     private String nit;
