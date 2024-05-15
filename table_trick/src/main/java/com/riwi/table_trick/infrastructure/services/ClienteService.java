@@ -52,7 +52,7 @@ public class ClienteService implements IClienteService {
 
     @Override
     public void delete(String id) {
-        this.clienteRepository.deleteById(id);
+        this.clienteRepository.delete(this.find(id));
     }
 
     @Override

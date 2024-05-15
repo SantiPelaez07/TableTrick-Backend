@@ -33,6 +33,7 @@ public class ReservaService implements IReservaService {
 
     @Override
     public void delete(String id) {
+        this.clienteRepository.deleteById(id);
     }
 
     @Override
@@ -84,7 +85,7 @@ public class ReservaService implements IReservaService {
 
     @Override
     public ReservaResponse getById(String id) {
-        return null;
+        return this.entityToResponse(this.find(id));
     }
 
 
@@ -122,9 +123,9 @@ public class ReservaService implements IReservaService {
     }
 
 
-
-
-
+    private Reserva find(String id){
+        return this.reservaRepository.findById(id).orElseThrow(null);
+    }
 
 
 }
