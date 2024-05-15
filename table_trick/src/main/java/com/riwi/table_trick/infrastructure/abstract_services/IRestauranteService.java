@@ -5,4 +5,5 @@ import com.riwi.table_trick.api.dto.response.RestauranteResponse;
 
 public interface IRestauranteService extends CrudService <RestauranteRequest, RestauranteResponse, String>{
     public RestauranteResponse getById(String id);
+    public final String FIELD_BY_SORT = "nombre";
 }
