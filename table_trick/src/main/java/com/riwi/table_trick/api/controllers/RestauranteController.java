@@ -36,13 +36,13 @@ public class RestauranteController {
 
     @GetMapping
     public ResponseEntity<Page<RestauranteResponse>> getAll(
-        @RequestHeader(required = false) SortType sortType,
+            @RequestHeader(required = false) SortType sortType,
             @RequestParam(value = "page", defaultValue = "0") int page,
             @RequestParam(value = "size", defaultValue = "8") int size) {
 
-       if (Objects.isNull(sortType)) sortType = sortType.NONE;
+       if (Objects.isNull(sortType)) sortType = SortType.NONE;
 
-        return ResponseEntity.ok(this.restauranteService.getAll(page, size, sortType));
+        return ResponseEntity.ok(this.restauranteService.getAll(page - 1, size, sortType));
     }
 
     @GetMapping(path = "/{id}")

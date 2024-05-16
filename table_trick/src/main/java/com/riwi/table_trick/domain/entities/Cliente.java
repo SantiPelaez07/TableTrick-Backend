@@ -10,6 +10,7 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+
 import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -35,8 +36,6 @@ public class Cliente {
     private String apellido;
     @Column(length = 100, nullable = false)
     private String email;
-    @Column(length = 50, nullable = false)
-    private String contraseña;
     @Column(length = 15, nullable = false)
     private String telefono;
 
@@ -45,6 +44,6 @@ public class Cliente {
      */
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-     @OneToMany(fetch = FetchType.EAGER, mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = false)
+     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "cliente", orphanRemoval = false)
      private List<Reserva> reserva;
 }

@@ -8,6 +8,7 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,12 +20,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class RestauranteRequest {
     @NotBlank(message = "El nombre del propietario de la compañía es requerido")
-    private String nombreAutor;
+    private String nombrePropietario;
 
     @NotBlank(message = "El apellido del propietario de la compañía es requerido")
-    private String apellidoAutor;
+    private String apellidoPropietario;
 
     @NotBlank(message = "El nombre comercial de la compañía es requerido")
+    @Size(min = 5, max = 30)
     private String nombreComercial;
 
     @NotBlank(message = "El nit de la compañía es requerido")
@@ -33,9 +35,6 @@ public class RestauranteRequest {
     @NotBlank(message = "El Email de la compañía es requerido")
     @Email(message = "El formato del correo electrónico no es válido")
     private String email;
-
-    @NotBlank(message = "La contraseña de la compañía es requerida")
-    private String contraseña;
 
     @NotBlank(message = "La fecha del registro de la compañía es requerida")
     @FutureOrPresent(message = "La fecha del registro debe ser en el presente o en el futuro")

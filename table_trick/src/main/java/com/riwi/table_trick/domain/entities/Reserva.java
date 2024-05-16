@@ -37,8 +37,6 @@ public class Reserva {
     private int cantidadPersonas;
     @Column( length = 500, nullable = false)
     private String descripcion;
-
-
     /*
      * Relaciones
      */

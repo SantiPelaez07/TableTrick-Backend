@@ -61,25 +61,30 @@ public class RestauranteService implements IRestauranteService{
     
     public Restaurante requestToEntity(RestauranteRequest request){
         return Restaurante.builder()
-        .nombrePropietario(request.getNombreAutor())
-        .apellidoPropietario(request.getApellidoAutor())
+        .nombrePropietario(request.getNombrePropietario())
+        .apellidoPropietario(request.getApellidoPropietario())
+        .nombreComercial(request.getNombreComercial())
         .nit(request.getNit())
         .email(request.getEmail())
-        .contraseña(request.getContraseña())
         .fecha_registro(request.getFechaRegistro())
         .ubicacion(request.getUbicacion())
         .capacidad_maxima(request.getCapacidadMaxima())
         .especialidad(request.getEspecialidad())
-        .tipoCuenta(request.getTipoCuenta()).build();
+        .tipoCuenta(request.getTipoCuenta().GRATUITA).build();
     
     }
 
     public RestauranteResponse entityToResponse(Restaurante restaurante){
         return RestauranteResponse.builder()
+        .id(restaurante.getId())
+        .nombrePropietario(restaurante.getNombrePropietario())
+        .apellidoPropietario(restaurante.getApellidoPropietario())
+        .nombreComercial(restaurante.getNombreComercial())    
         .nit(restaurante.getNit())
         .email(restaurante.getEmail())
-        .contraseña(restaurante.getContraseña())
         .ubicacion(restaurante.getUbicacion())
+        .fecha_registro(restaurante.getFecha_registro())
+        .capacidad_maxima(restaurante.getCapacidad_maxima())
         .especialidad(restaurante.getEspecialidad())
         .tipoCuenta(restaurante.getTipoCuenta()).build();
     }

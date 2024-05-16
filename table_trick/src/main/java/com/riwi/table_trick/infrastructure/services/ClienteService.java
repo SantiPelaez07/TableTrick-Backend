@@ -78,7 +78,6 @@ public class ClienteService implements IClienteService {
         .nombre(request.getNombre())
         .apellido(request.getApellido())
         .email(request.getEmail())
-        .contraseña(request.getContraseña())
         .telefono(request.getTelefono()).build();
     }
 
