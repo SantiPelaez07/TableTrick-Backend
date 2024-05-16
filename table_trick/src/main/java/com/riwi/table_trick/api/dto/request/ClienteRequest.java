@@ -18,8 +18,6 @@ public class ClienteRequest {
     @Email
     @NotBlank(message = "El email del cliente es requerido")
     private String email;
-    @NotBlank(message = "La contraseña del cliente es requerido")
-    private String contraseña;
     @NotBlank(message = "El teléfono del cliente es requerido")
     @Size(
             min = 10,

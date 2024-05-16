@@ -41,7 +41,7 @@ public class ReservaController {
             @RequestParam(value = "page", defaultValue = "0") int page,
             @RequestParam(value = "size", defaultValue = "8") int size) {
 
-       if (Objects.isNull(sortType)) sortType = sortType.NONE;
+       if (Objects.isNull(sortType)) sortType = SortType.NONE;
 
         return ResponseEntity.ok(this.reservaService.getAll(page, size, sortType));
     }

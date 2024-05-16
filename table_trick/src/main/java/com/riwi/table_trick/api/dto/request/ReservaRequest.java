@@ -2,6 +2,10 @@ package com.riwi.table_trick.api.dto.request;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+
+import com.riwi.table_trick.api.dto.response.ClienteResponseToReserva;
+import com.riwi.table_trick.domain.entities.Restaurante;
+
 import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -36,4 +40,11 @@ public class ReservaRequest {
     @NotBlank(message = "La descripción de la reserva es requerida")
     @Size(max = 1000, message = "La descripción de la reserva no puede exceder los 1000 caracteres")
     private String descripcion;
+
+    @NotBlank(message = "Se debe seleccionar un cliente paara esta reserva")
+    private ClienteResponseToReserva idCliente;
+
+    @NotBlank(message = "Se debe seleccionar un restaurante paara esta reserva")
+    private Restaurante idRestaurante;
+    
 }
