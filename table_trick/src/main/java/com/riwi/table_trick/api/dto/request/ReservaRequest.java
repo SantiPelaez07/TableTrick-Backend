@@ -3,8 +3,6 @@ package com.riwi.table_trick.api.dto.request;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-import com.riwi.table_trick.api.dto.response.ClienteResponseToReserva;
-import com.riwi.table_trick.domain.entities.Restaurante;
 
 import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotBlank;
@@ -42,9 +40,9 @@ public class ReservaRequest {
     private String descripcion;
 
     @NotBlank(message = "Se debe seleccionar un cliente paara esta reserva")
-    private ClienteResponseToReserva idCliente;
+    private String idCliente;
 
     @NotBlank(message = "Se debe seleccionar un restaurante paara esta reserva")
-    private Restaurante idRestaurante;
+    private String idRestaurante;
     
 }
