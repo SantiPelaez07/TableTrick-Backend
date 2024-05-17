@@ -4,8 +4,12 @@ import com.riwi.table_trick.api.dto.request.ReservaRequest;
 import com.riwi.table_trick.api.dto.response.ClienteResponseToReserva;
 import com.riwi.table_trick.api.dto.response.ReservaResponse;
 import com.riwi.table_trick.api.dto.response.RestauranteToReservaConverter;
+import com.riwi.table_trick.domain.entities.Cliente;
 import com.riwi.table_trick.domain.entities.Reserva;
+import com.riwi.table_trick.domain.entities.Restaurante;
+import com.riwi.table_trick.domain.repositories.ClienteRepository;
 import com.riwi.table_trick.domain.repositories.ReservaRepository;
+import com.riwi.table_trick.domain.repositories.RestauranteRepository;
 import com.riwi.table_trick.infrastructure.abstract_services.IReservaService;
 import com.riwi.table_trick.util.enums.SortType;
 import lombok.AllArgsConstructor;
@@ -22,6 +26,10 @@ import org.springframework.stereotype.Service;
 public class ReservaService implements IReservaService {
     @Autowired
     private final ReservaRepository reservaRepository;
+    @Autowired
+    private final RestauranteRepository restauranteRepository;
+    @Autowired
+    private final ClienteRepository clienteRepository;
 
 
     @Override
@@ -40,6 +48,7 @@ public class ReservaService implements IReservaService {
     @Override
     public ReservaResponse create(ReservaRequest request) {
         Reserva reserva = this.requestToEntity(request);
+        System.out.println(request);
         return entityToResponse(this.reservaRepository.save(reserva));
     }
 
@@ -62,12 +71,16 @@ public class ReservaService implements IReservaService {
 
 
     private Reserva requestToEntity(ReservaRequest reservaRequest){
+        Cliente cliente = this.clienteRepository.findById(reservaRequest.getIdCliente()).orElseThrow();
+        Restaurante restaurante = this.restauranteRepository.findById(reservaRequest.getIdRestaurante()).orElseThrow();
         return Reserva.builder()
                 .hora(reservaRequest.getHora())
                 .fecha(reservaRequest.getFecha())
                 .tipo(reservaRequest.getTipo())
                 .cantidadPersonas(reservaRequest.getCantidadPersonas())
                 .descripcion(reservaRequest.getDescripcion())
+                .cliente(cliente)
+                .restaurante(restaurante)
                 .build();
     }
 
@@ -75,6 +88,7 @@ public class ReservaService implements IReservaService {
     private ReservaResponse entityToResponse(Reserva entity){
         ClienteResponseToReserva cliente = new ClienteResponseToReserva();
         BeanUtils.copyProperties(entity.getCliente(), cliente);
+
 
         RestauranteToReservaConverter restaurante = new RestauranteToReservaConverter();
         BeanUtils.copyProperties(entity.getRestaurante(), restaurante);
@@ -89,21 +103,9 @@ public class ReservaService implements IReservaService {
             .restaurante(restaurante).build();
     }
 
-
-
     private Reserva find(String id){
         return this.reservaRepository.findById(id).orElseThrow();
     }
-    
-    
-    // private LocalTime hora;
-    // private LocalDate fecha;
-    // private String tipo;
-    // private int cantidadPersonas;
-    // private String descripcion;
-    // private ClienteResponseToReserva cliente;
-    // private RestauranteToReservaConverter restaurante;;
-
 
 
 
