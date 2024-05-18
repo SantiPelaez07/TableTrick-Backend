@@ -1,6 +1,5 @@
 package com.riwi.table_trick.api.controllers;
 
-import java.util.List;
 import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +25,7 @@ public class ClienteController {
     private final IClienteService clienteService;
 
     @PostMapping
-    public ResponseEntity create(@Validated @RequestBody ClienteRequest request){
+    public ResponseEntity<ClienteResponse> create(@Validated @RequestBody ClienteRequest request){
         return ResponseEntity.ok(this.clienteService.create(request));
     }
 
@@ -41,7 +40,7 @@ public class ClienteController {
             }
 
     @GetMapping(path = "/id/{id}")
-    public ResponseEntity getById(@PathVariable String id){
+    public ResponseEntity<ClienteResponse> getById(@PathVariable String id){
         return ResponseEntity.ok(this.clienteService.getById(id));
     }
 
@@ -59,7 +58,7 @@ public class ClienteController {
 
 
     @PutMapping(path = "/id/{id}")
-    public ResponseEntity update(@RequestBody ClienteRequest request, @PathVariable String id){
+    public ResponseEntity<ClienteResponse> update(@RequestBody ClienteRequest request, @PathVariable String id){
         return ResponseEntity.ok(this.clienteService.update(request, id));
     }
 

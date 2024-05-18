@@ -33,17 +33,15 @@ public class Restaurante {
     private String nombrePropietario;
     @Column(length = 50, nullable = false)
     private String apellidoPropietario;
-    @Column(length = 50, nullable = false)
+    @Column(length = 100, nullable = false)
     private String nombreComercial;
     @Column(length = 10, nullable = false)
     private String nit;
     @Column(length = 100, nullable = false)
     private String email;
-    @Column(length = 100, nullable = false)
-    private String contraseña;
     @Column(nullable = false)
     private LocalDate fecha_registro;
-    @Column(length = 180, nullable = false)
+    @Column(length = 200, nullable = false)
     private String ubicacion;
     @Column(nullable = false)
     private int capacidad_maxima;
@@ -57,6 +55,6 @@ public class Restaurante {
      */
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "restaurante", cascade = CascadeType.ALL, orphanRemoval = false)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "restaurante", orphanRemoval = false)
     private List<Reserva> reserva;
 }

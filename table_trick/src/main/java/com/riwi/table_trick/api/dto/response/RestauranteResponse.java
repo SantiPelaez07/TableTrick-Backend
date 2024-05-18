@@ -16,12 +16,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class RestauranteResponse {
     private String id;
-    private String nombreAutor;
-    private String apellidoAutor;
+    private String nombrePropietario;
+    private String apellidoPropietario;
     private String nombreComercial;
     private String nit;
     private String email;
-    private String contraseña;
     private LocalDate fecha_registro;
     private String ubicacion;
     private int capacidad_maxima;

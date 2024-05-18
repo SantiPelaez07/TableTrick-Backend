@@ -3,7 +3,6 @@ package com.riwi.table_trick.domain.entities;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -37,8 +36,6 @@ public class Reserva {
     private int cantidadPersonas;
     @Column( length = 500, nullable = false)
     private String descripcion;
-
-
     /*
      * Relaciones
      */

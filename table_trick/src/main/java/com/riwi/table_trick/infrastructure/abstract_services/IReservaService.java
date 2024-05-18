@@ -4,7 +4,7 @@ import com.riwi.table_trick.api.dto.request.ReservaRequest;
 import com.riwi.table_trick.api.dto.response.ClienteResponse;
 import com.riwi.table_trick.api.dto.response.ReservaResponse;
 
-public interface IReservaService extends CrudService <ReservaRequest, ReservaResponse, String>{
-    public ReservaResponse getById(String id);
+public interface IReservaService extends CrudService <ReservaRequest, ReservaResponse, Long>{
+    public ReservaResponse getById(Long id);
 
 }

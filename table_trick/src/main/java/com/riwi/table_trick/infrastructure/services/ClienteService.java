@@ -16,9 +16,6 @@ import com.riwi.table_trick.util.enums.SortType;
 
 import lombok.AllArgsConstructor;
 
-import javax.swing.text.html.parser.Entity;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -81,7 +78,6 @@ public class ClienteService implements IClienteService {
         .nombre(request.getNombre())
         .apellido(request.getApellido())
         .email(request.getEmail())
-        .contraseña(request.getContraseña())
         .telefono(request.getTelefono()).build();
     }
 
