@@ -2,19 +2,13 @@ package com.riwi.table_trick.api.controllers;
 
 import java.util.Objects;
 
+import com.riwi.table_trick.domain.entities.Reserva;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import com.riwi.table_trick.api.dto.request.ReservaRequest;
 import com.riwi.table_trick.api.dto.response.ReservaResponse;
@@ -35,7 +29,9 @@ public class ReservaController {
         return ResponseEntity.ok(this.reservaService.create(reserva));
     }
 
-    @GetMapping(path = "/reservas")
+
+
+    @GetMapping
     public ResponseEntity<Page<ReservaResponse>> getReservas(
         @RequestHeader(required = false) SortType sortType,
             @RequestParam(value = "page", defaultValue = "0") int page,
@@ -43,13 +39,24 @@ public class ReservaController {
 
        if (Objects.isNull(sortType)) sortType = SortType.NONE;
 
-        return ResponseEntity.ok(this.reservaService.getAll(page, size, sortType));
+        return ResponseEntity.ok(this.reservaService.getAll(page - 1, size, sortType));
     }
 
 
     @GetMapping(path = "/{id}")
     public ResponseEntity<ReservaResponse> consultaId(@Validated @PathVariable String id){
         return ResponseEntity.ok(this.reservaService.getById(id));
+    }
+
+
+
+    @GetMapping("/consulta")
+    public ResponseEntity<Page<ReservaResponse>> obtenerReservasPorNombreCliente(
+            @RequestParam(value = "nombreCliente") String nombreCliente,
+            @RequestParam(value = "page", defaultValue = "0") int page,
+            @RequestParam(value = "size", defaultValue = "8") int size) {
+        Page<ReservaResponse> reservas = this.reservaService.obtenerReservasPorNombreCliente(nombreCliente, page - 1, size);
+        return new ResponseEntity<>(reservas, HttpStatus.OK);
     }
 
     @PutMapping(path = "/{id}")

@@ -4,6 +4,8 @@ import java.time.LocalDate;
 
 import com.riwi.table_trick.util.enums.TipoCuenta;
 
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotBlank;
@@ -49,6 +51,7 @@ public class RestauranteRequest {
     @NotBlank(message = "La especialidad del establecimiento comercial es requerida")
     private String especialidad;
 
+    @Enumerated(EnumType.STRING)
     @NotBlank(message = "El tipo de cuenta de la compañía es requerido")
     private TipoCuenta tipoCuenta;
 }

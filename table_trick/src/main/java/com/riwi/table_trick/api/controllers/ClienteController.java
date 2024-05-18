@@ -17,7 +17,6 @@ import lombok.AllArgsConstructor;
 
 @RestController
 @RequestMapping(path = "/cliente")
-@CrossOrigin(origins = "http://127.0.0.1:5500")
 @AllArgsConstructor
 public class ClienteController {
 
@@ -28,6 +27,10 @@ public class ClienteController {
     public ResponseEntity<ClienteResponse> create(@Validated @RequestBody ClienteRequest request){
         return ResponseEntity.ok(this.clienteService.create(request));
     }
+
+
+
+
 
     @GetMapping
     public ResponseEntity<Page<ClienteResponse>> getAll(@RequestParam(defaultValue = "1") int page,
