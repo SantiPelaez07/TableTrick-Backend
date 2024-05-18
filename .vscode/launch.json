@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-TableTrickApplication<table_trick>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.riwi.table_trick.TableTrickApplication",
+            "projectName": "table_trick",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
