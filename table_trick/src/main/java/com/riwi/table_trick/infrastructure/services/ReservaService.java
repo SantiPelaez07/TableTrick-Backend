@@ -19,7 +19,7 @@ public class ReservaService implements IReservaService {
 
 
     @Override
-    public void delete(Long id) {
+    public void delete(String id) {
 
     }
 
@@ -40,7 +40,7 @@ public class ReservaService implements IReservaService {
     }
 
     @Override
-    public ReservaResponse getById(Long id) {
+    public ReservaResponse getById(String id) {
         return null;
     }
 
@@ -59,10 +59,6 @@ public class ReservaService implements IReservaService {
     private ReservaResponse requestToResponse(){
         return null;
     }
-
-
-
-
 
 
 
