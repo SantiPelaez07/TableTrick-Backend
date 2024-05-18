@@ -14,6 +14,6 @@ import java.time.LocalDate;
 public interface ReservaRepository extends JpaRepository <Reserva, String>{
     public Reserva findByFecha(LocalDate fecha);
 
-    @Query("SELECT r FROM reserva r JOIN r.cliente c WHERE c.nombre = :nombre")
-    Page<Reserva> findByClienteNombreIgnoreCaseContaining(String nombre, Pageable pageable);
+    @Query("SELECT r FROM reserva r JOIN r.cliente c WHERE LOWER(c.nombre) LIKE LOWER(concat('%', :nombre, '%'))")
+    Page<Reserva> findByClienteNombreIgnoreCaseContaining(@Param("nombre") String nombre, Pageable pageable);
 }
