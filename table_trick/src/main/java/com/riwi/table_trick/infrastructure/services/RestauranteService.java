@@ -70,7 +70,7 @@ public class RestauranteService implements IRestauranteService{
         .ubicacion(request.getUbicacion())
         .capacidad_maxima(request.getCapacidadMaxima())
         .especialidad(request.getEspecialidad())
-        .tipoCuenta(request.getTipoCuenta().GRATUITA).build();
+        .tipoCuenta(request.getTipoCuenta()).build();
     
     }
 

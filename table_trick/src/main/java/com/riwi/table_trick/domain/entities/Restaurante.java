@@ -5,14 +5,7 @@ import java.util.List;
 
 import com.riwi.table_trick.util.enums.TipoCuenta;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -48,6 +41,7 @@ public class Restaurante {
     @Column(nullable = false)
     private String especialidad;
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private TipoCuenta tipoCuenta;
 
     /*

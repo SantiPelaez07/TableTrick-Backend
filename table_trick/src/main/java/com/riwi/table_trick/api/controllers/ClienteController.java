@@ -17,7 +17,6 @@ import lombok.AllArgsConstructor;
 
 @RestController
 @RequestMapping(path = "/cliente")
-@CrossOrigin(origins = "http://127.0.0.1:5500")
 @AllArgsConstructor
 public class ClienteController {
 
