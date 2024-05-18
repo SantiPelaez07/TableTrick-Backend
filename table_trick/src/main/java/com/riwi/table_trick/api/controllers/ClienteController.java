@@ -28,6 +28,10 @@ public class ClienteController {
         return ResponseEntity.ok(this.clienteService.create(request));
     }
 
+
+
+
+
     @GetMapping
     public ResponseEntity<Page<ClienteResponse>> getAll(@RequestParam(defaultValue = "1") int page,
             @RequestParam(defaultValue = "8") int size, @RequestHeader(required = false) SortType sortType){

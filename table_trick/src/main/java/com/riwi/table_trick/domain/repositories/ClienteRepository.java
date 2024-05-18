@@ -9,5 +9,5 @@ import com.riwi.table_trick.domain.entities.Cliente;
 
 @Repository
 public interface ClienteRepository extends JpaRepository<Cliente, String> {
-    Page<Cliente> findByNombreStartingWithIgnoreCase(String nombre, Pageable pageable);
+    public Page<Cliente> findByNombreStartingWithIgnoreCase(String nombre, Pageable pageable);
 }

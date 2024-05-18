@@ -2,7 +2,9 @@ package com.riwi.table_trick.api.controllers;
 
 import java.util.Objects;
 
+import com.riwi.table_trick.domain.entities.Reserva;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
@@ -27,6 +29,8 @@ public class ReservaController {
         return ResponseEntity.ok(this.reservaService.create(reserva));
     }
 
+
+
     @GetMapping
     public ResponseEntity<Page<ReservaResponse>> getReservas(
         @RequestHeader(required = false) SortType sortType,
@@ -42,6 +46,17 @@ public class ReservaController {
     @GetMapping(path = "/{id}")
     public ResponseEntity<ReservaResponse> consultaId(@Validated @PathVariable String id){
         return ResponseEntity.ok(this.reservaService.getById(id));
+    }
+
+
+
+    @GetMapping("/consulta")
+    public ResponseEntity<Page<ReservaResponse>> obtenerReservasPorNombreCliente(
+            @RequestParam(value = "nombreCliente") String nombreCliente,
+            @RequestParam(value = "page", defaultValue = "0") int page,
+            @RequestParam(value = "size", defaultValue = "8") int size) {
+        Page<ReservaResponse> reservas = this.reservaService.obtenerReservasPorNombreCliente(nombreCliente, page - 1, size);
+        return new ResponseEntity<>(reservas, HttpStatus.OK);
     }
 
     @PutMapping(path = "/{id}")

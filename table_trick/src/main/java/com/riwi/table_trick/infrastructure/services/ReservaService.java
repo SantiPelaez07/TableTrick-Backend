@@ -18,6 +18,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -70,6 +71,15 @@ public class ReservaService implements IReservaService {
     }
 
 
+    @Override
+    public Page<ReservaResponse> obtenerReservasPorNombreCliente(String nombreCliente, int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Reserva> reservas = reservaRepository.findByClienteNombreIgnoreCaseContaining(nombreCliente, pageable);
+        return reservas.map(this::entityToResponse);
+    }
+
+
+
     private Reserva requestToEntity(ReservaRequest reservaRequest){
         Cliente cliente = this.clienteRepository.findById(reservaRequest.getIdCliente()).orElseThrow();
         Restaurante restaurante = this.restauranteRepository.findById(reservaRequest.getIdRestaurante()).orElseThrow();
@@ -110,3 +120,4 @@ public class ReservaService implements IReservaService {
 
 
 }
+
