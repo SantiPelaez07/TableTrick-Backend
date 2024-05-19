@@ -28,31 +28,24 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
 
 
-
-
-
-
     //Todos los filtros relacionados al token
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        //Obtenemos el token
         final String token = getTokenFromRequest(request);
         final String user;
 
-        if (token ==null){
-            //Si el token es null, le vamos a dar el control a la cadena de filtros
+        if (token == null) {
             filterChain.doFilter(request, response);
             return;
         }
 
-
         user = jwtService.getUserNameFromToken(token);
 
-        if (user != null && SecurityContextHolder.getContext().getAuthentication() == null){
+        if (user != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             UserDetails userDetails = userDetailsService.loadUserByUsername(user);
 
-            if (jwtService.isTokenValid(token, userDetails)){
-                UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(userDetails,null, userDetails.getAuthorities());
+            if (jwtService.isTokenValid(token, userDetails)) {
+                UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
 
                 authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 
@@ -60,16 +53,16 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             }
         }
 
-
+        filterChain.doFilter(request, response);
     }
 
     //Nos devuelve el token
     //En el encabezado del request es donde obtenemos el token
     private String getTokenFromRequest(HttpServletRequest request) {
-        final String authHeader  = request.getHeader(HttpHeaders.AUTHORIZATION);
+        final String authHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
 
-        if (StringUtils.hasText(authHeader) && authHeader.startsWith("Bearer ")){
-            return  authHeader.substring(7);
+        if (StringUtils.hasText(authHeader) && authHeader.startsWith("Bearer ")) {
+            return authHeader.substring(7);
         }
         return null;
     }
