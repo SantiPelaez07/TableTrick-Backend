@@ -8,6 +8,9 @@ import com.riwi.table_trick.domain.repositories.UserRepository;
 import com.riwi.table_trick.infrastructure.abstract_services.IAuthService;
 import com.riwi.table_trick.util.enums.Role;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -18,11 +21,18 @@ public class AuthService implements IAuthService {
     private final UserRepository userRepository;
     private final JwtService jwtService;
     private final PasswordEncoder passwordEncoder;
+    private final AuthenticationManager authenticationManager;
 
     @Override
     public AuthResponse login(LoginRequest loginRequest) {
         // Implementación del login (pendiente)
-        return null;
+        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUser(), loginRequest.getPassword()));
+        UserDetails user = userRepository.findByUser(loginRequest.getUser()).orElseThrow();
+        String token = jwtService.getToken(user);
+
+        return AuthResponse.builder()
+                .token(token)
+                .build();
     }
 
     @Override

@@ -23,7 +23,7 @@ public class RestaurantUser implements UserDetails {
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
-    @Column(length = 150, nullable = false)
+    @Column(length = 150, nullable = false, unique = true)
     private String user;
 
     @Column(length = 150, nullable = false, unique = true)
