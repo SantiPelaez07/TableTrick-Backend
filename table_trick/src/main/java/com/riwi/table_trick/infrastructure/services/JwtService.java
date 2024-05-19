@@ -1,6 +1,7 @@
 package com.riwi.table_trick.infrastructure.services;
 
 import com.riwi.table_trick.domain.entities.RestaurantUser;
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
@@ -12,6 +13,7 @@ import java.security.Key;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Function;
 
 @Service
 public class JwtService {
@@ -35,4 +37,42 @@ public class JwtService {
     private Key getKey() {
         return Keys.hmacShaKeyFor(SECRET_KEY_BYTES);
     }
+
+    public String getUserNameFromToken(String token) {
+        return this.getClaim(token, Claims::getSubject);
+    }
+
+    public boolean isTokenValid(String token, UserDetails userDetails) {
+        final  String user = getUserNameFromToken(token);
+
+        return (user.equals(userDetails.getUsername()) && !isTokenExpired(token));
+    }
+
+
+
+    private Claims getAllClaims(String token){
+        return Jwts
+                .parserBuilder()
+                .setSigningKey(getKey())
+                .build()
+                .parseClaimsJwt(token)
+                .getBody();
+    }
+
+
+    public <T> T getClaim(String token, Function<Claims, T> claimsResolver){
+        final Claims claims = this.getAllClaims(token);
+        return claimsResolver.apply(claims);
+    }
+
+    private Date getExpiration(String token){
+        return getClaim(token, Claims::getExpiration);
+    }
+
+    private boolean isTokenExpired(String token){
+        return getExpiration(token).before(new Date());
+    }
+
+
+
 }

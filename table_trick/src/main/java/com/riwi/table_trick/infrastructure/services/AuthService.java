@@ -32,6 +32,7 @@ public class AuthService implements IAuthService {
 
         return AuthResponse.builder()
                 .token(token)
+                .mensaje("Logeado correctamente")
                 .build();
     }
 

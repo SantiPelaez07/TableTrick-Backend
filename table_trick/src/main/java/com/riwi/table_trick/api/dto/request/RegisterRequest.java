@@ -19,7 +19,6 @@ public class RegisterRequest {
     @Size(min = 8, max = 150, message = "El usuario debe tener entre 8 y 150 caracteres")
     private String nombre;
 
-    //Para tema de relación, en caso de no hacer descomentar
 
     @NotBlank(message ="El email es obligatorio")
     @Size(min = 8, max = 150, message = "El usuario debe tener entre 8 y 150 caracteres")
@@ -30,5 +29,7 @@ public class RegisterRequest {
     @Size(min = 8, max = 150, message = "El usuario debe tener entre 8 y 150 caracteres")
     @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$", message = "La contraseña no cumple con los requisitos mínimos")
     private String password;
-
 }
+
+
+
