@@ -28,7 +28,7 @@ public class Restaurante {
     private String apellidoPropietario;
     @Column(length = 100, nullable = false)
     private String nombreComercial;
-    @Column(length = 10, nullable = false)
+    @Column(length = 50, nullable = false)
     private String nit;
     @Column(length = 100, nullable = false)
     private String email;
