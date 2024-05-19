@@ -1,6 +1,5 @@
 package com.riwi.table_trick.api.dto.request;
 
-import jakarta.persistence.Entity;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
