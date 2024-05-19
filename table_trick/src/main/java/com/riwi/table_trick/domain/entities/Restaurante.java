@@ -22,25 +22,25 @@ public class Restaurante {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
-    @Column(length = 40, nullable = false)
+    @Column(length = 40, nullable = true)
     private String nombrePropietario;
-    @Column(length = 50, nullable = false)
+    @Column(length = 50, nullable = true)
     private String apellidoPropietario;
-    @Column(length = 100, nullable = false)
+    @Column(length = 100, nullable = true)
     private String nombreComercial;
-    @Column(length = 50, nullable = false)
+    @Column(length = 50, nullable = true)
     private String nit;
-    @Column(length = 100, nullable = false)
+    @Column(length = 100, nullable = true)
     private String email;
     @Column(nullable = false)
     private LocalDate fecha_registro;
-    @Column(length = 200, nullable = false)
+    @Column(length = 200, nullable = true)
     private String ubicacion;
-    @Column(nullable = false)
+    @Column(nullable = true)
     private int capacidad_maxima;
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String especialidad;
-    @Column(nullable = false)
+    @Column(nullable = true)
     @Enumerated(EnumType.STRING)
     private TipoCuenta tipoCuenta;
 
