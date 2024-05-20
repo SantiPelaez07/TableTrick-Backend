@@ -17,7 +17,8 @@ import com.riwi.table_trick.util.enums.SortType;
 
 import lombok.AllArgsConstructor;
 
-@Controller
+
+@RestController
 @RequestMapping(path = "/reserva")
 @AllArgsConstructor
 public class ReservaController {
