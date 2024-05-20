@@ -17,8 +17,6 @@ public class RegisterRequest {
     @NotBlank(message ="El nombre es obligatorio")
     @Size(min = 8, max = 150, message = "El usuario debe tener entre 8 y 150 caracteres")
     private String nombre;
-
-
     @NotBlank(message ="El email es obligatorio")
     @Size(min = 8, max = 150, message = "El usuario debe tener entre 8 y 150 caracteres")
     @Pattern(regexp = "^[\\w.-]+@[a-zA-Z\\d.-]+\\.[a-zA-Z]{2,}$", message = "El email no es válido")
