@@ -1,4 +1,4 @@
-package com.riwi.table_trick.api.controllers;
+package com.riwi.table_trick.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;

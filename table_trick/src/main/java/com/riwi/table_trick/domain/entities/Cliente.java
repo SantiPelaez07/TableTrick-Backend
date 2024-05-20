@@ -19,7 +19,6 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-
 @Entity(name = "cliente")
 @Data
 @Builder
