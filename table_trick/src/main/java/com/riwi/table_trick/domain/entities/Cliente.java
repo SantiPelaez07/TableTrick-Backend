@@ -43,6 +43,6 @@ public class Cliente {
      */
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "cliente", orphanRemoval = false)
-     private List<Reserva> reserva;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "cliente", orphanRemoval = false)
+    private List<Reserva> reserva;
 }

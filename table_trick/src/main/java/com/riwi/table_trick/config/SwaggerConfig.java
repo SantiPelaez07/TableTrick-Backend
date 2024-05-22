@@ -28,7 +28,6 @@ import org.springframework.http.HttpHeaders;
                 name ="Security token"
         )
 
-
 )
 @SecurityScheme(
         name = "Security token" ,

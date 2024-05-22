@@ -2,8 +2,6 @@ package com.riwi.table_trick.api.controllers;
 
 import java.util.Objects;
 
-import com.riwi.table_trick.api.dto.request.LoginRequest;
-import com.riwi.table_trick.api.dto.response.AuthResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
